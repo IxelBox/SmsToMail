@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Shower Presentation Engine</title>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="shower/themes/ribbon/styles/screen-16x10.css">
+	<style>
+		.licence {
+			font-size: 8pt;
+			text-shadow: none
+			}
+	</style>
+</head>
+<body class="shower list">
+	<header class="caption">
+		<h1>SMS unter Linux</h1>
+		<p>von Adrian Böhmichen</p>
+		<p>
+			<div class="licence">
+					<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Lizenzvertrag" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a>
+					<br />Dieses Werk ist lizenziert unter einer <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Namensnennung - Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a>.
+			</div>
+		</p>
+	</header>
+<!--	<section class="slide" id="cover">
+		<h2>Shower Presentation Engine</h2>
+		<p>Brought to you by <a href="http://pepelsbey.net">Vadim Makeev</a></p>
+		<img src="pictures/cover.jpg" alt="" class="cover">
+		<style>
+			#cover h2 {
+				margin:30px 0 0;
+				color:#FFF;
+				text-align:center;
+				font-size:70px;
+				}
+			#cover p {
+				margin:10px 0 0;
+				text-align:center;
+				color:#FFF;
+				font-style:italic;
+				font-size:20px;
+				}
+				#cover p a {
+					color:#FFF;
+					}
+		</style>
+	</section>-->
+	<section class="slide">
+		<h2 class="shout shrink">SMS unter Linux</h2>
+		<p class="note">von Adrian Böhmichen</p>
+	</section>
+	<section class="slide">
+		<h2>Agenda</h2>
+		<ol>
+			<li>Motivation</li>
+			<li>Anwendungsfälle</li>
+			<li>Technischer Hintergrund</li>
+			<li>Fallstricke Hardware</li>
+			<li>Fallstricke Software</li>
+			<li>Ende</li>
+		</ol>
+	</section>
+	<section class="slide">
+		<h2 class="shout">Wieso SMS nutzen?</h2>
+	</section>
+	<section class="slide">
+		<h2>Motivation</h2>
+		<ul>
+			<li>Alternativer Kommunikationsweg</li>
+			<li>Großflächig verfügbar</li>
+			<li>Zwei Wege Kommunikation<
+				<ul>
+					<li>Zur Information</li>
+					<li>Zur Steuerung</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2>Anwendungsfälle</h2>
+		<ul>
+			<li>Benachrichtung über Icinga/Nagios events</li>
+			<li>Steuerung von IoT Geräten</li>
+			<li>SMS Gateway</li>
+			<li>
+				...
+			</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2>Technischer Hintergrund</h2>
+		<ul>
+			<li>Unter Linux geht jedes GSM Modul, welches über AT-Commands gesteuert wird.</li>
+			<li>Unterschiedliche Hardware Lösungen:
+				<ul>
+					<li>GSM Modems(recht teuer)</li>
+					<li>UMTS USB Sticks</li>
+				</ul>
+			</li>
+			<li>Zwei unterschiedliche Programme für SMS:
+				<ul>
+					<li>SMS Server Tool 3</li>
+					<li>Gammu (GNU All Mobile Management Utilitie)</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2>Fallstricke Hardware</h2>
+		<ul>
+			<li>Modem mit AT Commands finden ist schwierig</li>
+			<li>USB-Modems benötigen "viel" Strom (Raspberry)</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2>Fallstricke Software</h2>
+		<ul>
+			<li><a href="http://smstools3.kekekasvi.com/">SMS Server Tool</a>
+				<ul>
+					<li>Konfiguration ist kompliziert</li>
+					<li>Gut erprobt, viele HowTo's</li>
+				</ul>
+			</li>
+			<li><a href="http://gammu.org/">Gammu</a>
+				<ul>
+					<li>Sehr leichte Konfiguration</li>
+					<li>Ist kein Hintergrunddienst, aber gammu-smsdrc</li>
+					<li>Benutzung mit Text Dateien</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2>Tipps - Datei Verwaltung</h2>
+		<ul>
+			<li><a href="http://inotify.aiken.cz/?section=incron&page=about">Incron</a> für Dateiänderungen
+				<ul>
+					<li>cron aquvivalent für Dateisystemevents</li>
+					<li>Einfache Konfiguration</li>
+					<li>Ist nur Beta Version</li>
+				</ul>
+			</li>
+		</ul>
+		</section>
+		<section class="slide">
+			<h2>Mail versand</h2>
+				<ul>
+					<li>ssmtp
+						<ul>
+							<li>Erprobtes SMTP Relay</li>
+							<li>Passwort darf kein "#" haben (Bug)</li>
+						</ul>
+					</li>
+					<li><a href="http://msmtp.sourceforge.net/">msmtp</a>
+						<ul>
+							<li>
+								Alterantive ohne Bug
+							</li>
+						</ul>
+					</li>
+					<li><a href="http://www.mutt.org/">Mutt</a>
+						<ul>
+							<li>
+								Kann PGP und vieles mehr benötigt aber eines der obigen Programme!
+							</li>
+						</ul>
+					</li>
+				</ul>
+	</section>
+	<section class="slide">
+		<h2 class="shout grow">Beispiel</h2>
+	</section>
+	<section class="slide">
+		<h2 class="shout">Ende!</h2>
+	</section>
+	<p class="badge">
+		<a href="https://github.com/IxelBox/SmsToMail">Beispiel Konfiguration</a>
+	</p>
+	<!--
+		To hide progress bar from entire presentation
+		just remove “progress” element.
+		-->
+	<div class="progress"></div>
+	<script src="shower/shower.min.js"></script>
+	<!-- Copyright © 2015 Yours Truly, Famous Inc. -->
+	<!-- Photos by John Carey, fiftyfootshadows.net -->
+</body>
+</html>
