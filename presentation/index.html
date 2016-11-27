@@ -51,6 +51,22 @@
 		<h2 class="shout shrink">SMS unter Linux</h2>
 		<p class="note">von Adrian Böhmichen</p>
 	</section>
+	
+	<section class="slide">
+		<h2>Befehle</h2>
+		<pre>
+			<code>echo "Ein Text!" | gammu --sendsms TEXT 0123456789</code>
+			<code>gammu --getallsms</code>
+		</pre>
+	</section>
+	
+	
+	
+	<section class="slide">
+		<h2 class="shout grow">Ende</h2>
+	</section>
+	
+	
 	<section class="slide">
 		<h2>Agenda</h2>
 		<ol>
@@ -81,7 +97,7 @@
 	<section class="slide">
 		<h2>Anwendungsfälle</h2>
 		<ul>
-			<li>Benachrichtung über Icinga/Nagios events</li>
+			<li>Benachrichtigung über Icinga/Nagios Events</li>
 			<li>Steuerung von IoT Geräten</li>
 			<li>SMS Gateway</li>
 			<li>
@@ -137,37 +153,80 @@
 		<ul>
 			<li><a href="http://inotify.aiken.cz/?section=incron&page=about">Incron</a> für Dateiänderungen
 				<ul>
-					<li>cron aquvivalent für Dateisystemevents</li>
+					<li>cron äquivalent für Dateisystemevents</li>
 					<li>Einfache Konfiguration</li>
-					<li>Ist nur Beta Version</li>
+					<li>Ist Beta und inaktive Entwicklung</li>
+				</ul>
+			</li>
+			<li>systemd
+				<ul>
+					<li>Aktuell</li>
+					<li>Konfiguration umständlich</li>
 				</ul>
 			</li>
 		</ul>
-		</section>
+	</section>
 		<section class="slide">
-			<h2>Mail versand</h2>
-				<ul>
-					<li>ssmtp
-						<ul>
-							<li>Erprobtes SMTP Relay</li>
-							<li>Passwort darf kein "#" haben (Bug)</li>
-						</ul>
-					</li>
-					<li><a href="http://msmtp.sourceforge.net/">msmtp</a>
-						<ul>
-							<li>
-								Alterantive ohne Bug
-							</li>
-						</ul>
-					</li>
-					<li><a href="http://www.mutt.org/">Mutt</a>
-						<ul>
-							<li>
-								Kann PGP und vieles mehr benötigt aber eines der obigen Programme!
-							</li>
-						</ul>
-					</li>
-				</ul>
+		<h2>Tipps - Datei Verwaltung - systemd</h2>
+		<pre>
+		.path file:
+		<code>[Unit]</code>
+		<code>Description=file change tracker for sms path</code>
+		<code>[Path]</code>
+		<code>PathChanged=/tmp/test</code>
+		<code>[Install]</code>
+		<code>wantedBy=basic.target</code>
+		</pre>
+	</section>
+	<section class="slide">
+		<h2>Tipps - Datei Verwaltung - systemd</h2>
+		<pre>
+		.service file:
+		<code>[Unit]</code>
+		<code>Description=file change tracker for sms service</code>
+		<code>[Service]</code>
+		<code>Type=oneshot</code>
+		<code>Exec=/pfad/zum/skript.sh</code>
+		<code>[Install]</code>
+		<code>wantedBy=basic.target</code>
+		</pre>
+	</section>
+	<section class="slide">
+		<h2>Tipps - Datei Verwaltung - systemd</h2>
+		<ul>
+			<li>Pfad: <code>/etc/systemd/system</code></li>
+			<li>Zum starten:
+			<pre>
+				<code>systemctl start file-change.path</code>
+				<code>systemctl enable file-change.path</code>
+			</pre>
+			</li>
+		</ul>
+	</section>
+	<section class="slide">
+		<h2>Mail versand</h2>
+			<ul>
+				<li>ssmtp
+					<ul>
+						<li>Erprobtes SMTP Relay</li>
+						<li>Passwort darf kein "#" haben (Bug)</li>
+					</ul>
+				</li>
+				<li><a href="http://msmtp.sourceforge.net/">msmtp</a>
+					<ul>
+						<li>
+							Alternative ohne Bug
+						</li>
+					</ul>
+				</li>
+				<li><a href="http://www.mutt.org/">Mutt</a>
+					<ul>
+						<li>
+							Kann PGP und vieles mehr benötigt aber eines der obigen Programme!
+						</li>
+					</ul>
+				</li>
+			</ul>
 	</section>
 	<section class="slide">
 		<h2 class="shout grow">Beispiel</h2>
